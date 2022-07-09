@@ -1,11 +1,12 @@
 /** @format */
 
 import "./App.css";
+import Pentacle from "./component/pentacle";
 
 function App() {
   return (
     <div className="App">
-      <h1>Pentacle 5️⃣❎6️⃣</h1>
+      <Pentacle />
     </div>
   );
 }

@@ -1,6 +1,10 @@
 /** @format */
 
 * {
-  margin: 0px;
-  padding: 0px;
+  color: #ffffff;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+body {
+  background-color: #121213;
 }
