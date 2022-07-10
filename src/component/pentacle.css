@@ -1,7 +1,7 @@
 /** @format */
 
 .gameContainer {
-  height: 90vh;
+  height: 95vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -59,4 +59,10 @@
 
 .messageContainer {
   height: 30px;
+}
+.messageContainer p {
+  background-color: #818384;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 0;
 }
