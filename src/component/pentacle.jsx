@@ -109,29 +109,29 @@ const Pentacle = () => {
           inter[currentrow] = 1;
           setEnable(inter);
           if (guess === wordle) {
-            showmessage("You Done it");
+            showmessage("You Done it",10000);
             isgameover = true;
           } else {
             currentrow++;
             currenttail = 0;
             if (currentrow >= 5) {
               isgameover = false;
-              showmessage(`Game over it is ${wordle}`);
+              showmessage(`Game over it is ${wordle}`,100000);
               return;
             }
           }
         } else {
-          showmessage("Not a word");
+          showmessage("Not a word",4000);
         }
       } else {
-        showmessage("5 Letter are not completed");
+        showmessage("5 Letter are not completed",3000);
       }
     }
   };
 
-  const showmessage = (msg) => {
+  const showmessage = (msg,tym) => {
     setMessage(msg);
-    setTimeout(() => setMessage(""), 6000);
+    setTimeout(() => setMessage(""), tym);
   };
 
   return (
