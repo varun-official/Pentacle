@@ -88,23 +88,29 @@ const Pentacle = () => {
     "«",
   ];
 
-  const [guessbox, setGuessbox] = useState([
-    ["", "", "", "", ""],
-    ["", "", "", "", ""],
-    ["", "", "", "", ""],
-    ["", "", "", "", ""],
-    ["", "", "", "", ""],
-  ]);
+  // const [guessbox, setGuessbox] = useState([
+  //   ["", "", "", "", ""],
+  //   ["", "", "", "", ""],
+  //   ["", "", "", "", ""],
+  //   ["", "", "", "", ""],
+  //   ["", "", "", "", ""],
+  // ]);
+
+  const [guessbox, setGuessbox] = useState(Array(6).fill(Array(5).fill("")));
+
   const [message, setMessage] = useState("");
   const [enable, setEnable] = useState([0, 0, 0, 0, 0, 0]);
-  const [arraycolor, setArrayColor] = useState([
-    ["tile", "tile", "tile", "tile", "tile"],
-    ["tile", "tile", "tile", "tile", "tile"],
-    ["tile", "tile", "tile", "tile", "tile"],
-    ["tile", "tile", "tile", "tile", "tile"],
-    ["tile", "tile", "tile", "tile", "tile"],
-    ["tile", "tile", "tile", "tile", "tile"],
-  ]);
+  // const [arraycolor, setArrayColor] = useState([
+  //   ["tile", "tile", "tile", "tile", "tile"],
+  //   ["tile", "tile", "tile", "tile", "tile"],
+  //   ["tile", "tile", "tile", "tile", "tile"],
+  //   ["tile", "tile", "tile", "tile", "tile"],
+  //   ["tile", "tile", "tile", "tile", "tile"],
+  //   ["tile", "tile", "tile", "tile", "tile"],
+  // ]);
+  const [arraycolor, setArrayColor] = useState(
+    Array(6).fill(Array(5).fill("tile"))
+  );
 
   const isit = (row, index) => {
     let temp = [...arraycolor];
