@@ -8,6 +8,7 @@ let currentrow = 0;
 let currenttail = 0;
 let isgameover = false;
 let wordle = "SUPER";
+const mapof = new Map();
 
 const Pentacle = () => {
   useEffect(() => {
@@ -32,6 +33,15 @@ const Pentacle = () => {
       .catch((error) => {
         console.error(error);
       });
+
+    var inter = wordle.split("");
+    inter.map((r) => {
+      if (mapof.has(r)) {
+        mapof.set(r, mapof.get(r) + 1);
+      } else {
+        mapof.set(r, 1);
+      }
+    });
     setGuessbox([
       ["", "", "", "", ""],
       ["", "", "", "", ""],
@@ -87,6 +97,31 @@ const Pentacle = () => {
   ]);
   const [message, setMessage] = useState("");
   const [enable, setEnable] = useState([0, 0, 0, 0, 0, 0]);
+  const [arraycolor, setArrayColor] = useState([
+    ["tile", "tile", "tile", "tile", "tile"],
+    ["tile", "tile", "tile", "tile", "tile"],
+    ["tile", "tile", "tile", "tile", "tile"],
+    ["tile", "tile", "tile", "tile", "tile"],
+    ["tile", "tile", "tile", "tile", "tile"],
+    ["tile", "tile", "tile", "tile", "tile"],
+  ]);
+
+  const isit = (row, index) => {
+    let temp = [...arraycolor];
+
+    row.map((r, i) => {
+      if (r == wordle[i]) {
+        temp[index][i] = "tile green-overlay";
+      } else if (mapof.get(r) > 0) {
+        temp[index][i] = "tile yellow-overlay";
+        mapof.set(r, mapof.get(r) - 1);
+      } else {
+        temp[index][i] = "tile grey-overlay";
+      }
+    });
+
+    setArrayColor(temp);
+  };
 
   const handlekeystroke = async (key) => {
     if (key !== "ENTER" && key !== "«" && currenttail < 5 && currentrow < 6) {
@@ -107,29 +142,30 @@ const Pentacle = () => {
         if (result === 200) {
           const inter = [...enable];
           inter[currentrow] = 1;
+          isit(guessbox[currentrow], currentrow);
           setEnable(inter);
           if (guess === wordle) {
-            showmessage("You Done it",10000);
+            showmessage("You Done it", 10000);
             isgameover = true;
           } else {
             currentrow++;
             currenttail = 0;
             if (currentrow >= 5) {
               isgameover = false;
-              showmessage(`Game over it is ${wordle}`,100000);
+              showmessage(`Game over it is ${wordle}`, 100000);
               return;
             }
           }
         } else {
-          showmessage("Not a word",4000);
+          showmessage("Not a word", 4000);
         }
       } else {
-        showmessage("5 Letter are not completed",3000);
+        showmessage("5 Letter are not completed", 3000);
       }
     }
   };
 
-  const showmessage = (msg,tym) => {
+  const showmessage = (msg, tym) => {
     setMessage(msg);
     setTimeout(() => setMessage(""), tym);
   };
@@ -143,26 +179,29 @@ const Pentacle = () => {
         {message.length > 0 ? <p>{message}</p> : <></>}
       </div>
       <div className="matrixContainer ">
-        {guessbox.map((guessrow, i) => (
-          <div id={"guessrow" + i}>
-            {guessrow.map((guess, j) => (
-              <div
-                className={
-                  enable[i] === 1
-                    ? wordle[j] === guess
-                      ? "tile green-overlay"
-                      : wordle.includes(guess)
-                      ? "tile yellow-overlay"
-                      : "tile grey-overlay"
-                    : "tile"
-                }
-                id={"guessrow" + i + "guesstail" + j}
-              >
-                {guess}
-              </div>
-            ))}
-          </div>
-        ))}
+        {guessbox.map((guessrow, i) => {
+          return (
+            <div id={"guessrow" + i}>
+              {guessrow.map((guess, j) => (
+                <div
+                  // className={
+                  //   enable[i] === 1
+                  //     ? wordle[j] === guess
+                  //       ? "tile green-overlay"
+                  //       : wordle.includes(guess)
+                  //       ? "tile yellow-overlay"
+                  //       : "tile grey-overlay"
+                  //     : "tile"
+                  // }
+                  className={arraycolor[i][j]}
+                  id={"guessrow" + i + "guesstail" + j}
+                >
+                  {guess}
+                </div>
+              ))}
+            </div>
+          );
+        })}
       </div>
       <div className="keyContainer">
         {keys.map((key, i) => (
