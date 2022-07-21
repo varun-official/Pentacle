@@ -190,17 +190,17 @@ const Pentacle = () => {
             <div id={"guessrow" + i}>
               {guessrow.map((guess, j) => (
                 <div
-                  // className={
-                  //   enable[i] === 1
-                  //     ? wordle[j] === guess
-                  //       ? "tile green-overlay"
-                  //       : wordle.includes(guess)
-                  //       ? "tile yellow-overlay"
-                  //       : "tile grey-overlay"
-                  //     : "tile"
-                  // }
-                  className={arraycolor[i][j]}
-                  id={"guessrow" + i + "guesstail" + j}
+                  className={
+                    enable[i] === 1
+                      ? wordle[j] === guess
+                        ? "tile green-overlay"
+                        : wordle.includes(guess)
+                        ? "tile yellow-overlay"
+                        : "tile grey-overlay"
+                      : "tile"
+                  }
+                  // className={arraycolor[i][j]}
+                  // id={"guessrow" + i + "guesstail" + j}
                 >
                   {guess}
                 </div>
