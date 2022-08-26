@@ -53,8 +53,15 @@ const Pentacle = () => {
 
   const isword = async (word) => {
     let url = `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`;
-    const resp = await fetch(url);
-    return resp.status;
+    try {
+      let ares = await axios.get(url);
+      return ares.status
+    } catch (error) {
+      console.log("It has error");
+      return 404;
+    }
+    // const resp = await fetch(url);
+    // return resp.status;
   };
 
   const keys = [
